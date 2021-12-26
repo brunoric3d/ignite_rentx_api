@@ -1,0 +1,101 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "RentX Docs",
+    "description": "RentX API",
+    "version": "1.0.0",
+    "contact": {
+      "email": "brunoric3d@gmail.com"
+    }
+  },
+  "paths": {
+    "/categories": {
+      "post": {
+        "tags": ["Category"],
+        "summary" : "Create category",
+        "description": "Creates a new category",
+        "requestBody": {
+          "content":{"application/json":{
+            "schema":{
+              "type":"object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "description":{
+                  "type": "string"
+                }
+              },
+              "example": {
+                "name": "SUV",
+                "description":"Family cars"
+              }
+            }
+          }
+        }
+        },
+        "responses": {
+          "201": {"description":"Sucess"}
+        }
+      }
+    },
+    "/categories/import": {
+      "post": {
+        "tags": ["Category"],
+        "summary" : "Import Categories",
+        "description": "Import categories from a .csv file",
+        "requestBody": {
+          "content":{"multipart/form-data": {
+            "schema": {
+              "type":"object",
+              "properties":{
+                "file": {
+                  "type":"string",
+                  "format":"binary"
+                  }
+                }   
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {"description":"Sucess"}
+        }
+      }
+    },
+
+    "/specifications": {
+      "post": {
+        "tags": ["Specification"],
+        "summary" : "Create specification",
+        "description": "Creates a new specification",
+        "requestBody": {
+          "content":{"application/json":{
+            "schema":{
+              "$ref": "#/definitions/Specification"
+              }
+          }
+        }
+        },
+        "responses": {
+          "201": {"description":"Sucess"},
+          "500": {"description":"Specification already exists"}
+        }
+      }
+    }
+  },
+
+  "definitions": {
+    "Specification":{
+      "type":"object",
+      "Properties":{
+        "name":{
+          "type":"string"
+        },
+        "description":{
+          "type":"string"
+        }
+      }
+    }
+  }
+}
