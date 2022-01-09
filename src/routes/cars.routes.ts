@@ -10,7 +10,7 @@ import UploadCarImageController from "../modules/cars/useCases/uploadCarImage/Up
 
 const carsRoutes = Router();
 
-const uploadCarImages = multer(UploadConfig.upload("./tmp/cars"));
+const fileUpload = multer(UploadConfig);
 
 const createCarController = new CreateCarController();
 const listCarsController = new ListCarsController();
@@ -29,7 +29,7 @@ carsRoutes.post(
   "/images/:id",
   ensureAuthenticated,
   ensureAdmin,
-  uploadCarImages.array("images"),
+  fileUpload.array("images"),
   uploadCarImageController.handle
 );
 

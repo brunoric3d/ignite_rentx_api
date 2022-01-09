@@ -18,6 +18,10 @@ import { DateProvider } from "../providers/DateProvider";
 import { EtherealMailProvider } from "../providers/EtherealMailProvider";
 import { IDateProvider } from "../providers/IDateProvider";
 import { IMailProvider } from "../providers/IMailProvider";
+import { IStorageProvider } from "../providers/IStorageProvider";
+import { LocalStorageProvider } from "../providers/LocalStorageProvider";
+import { S3StorageProvider } from "../providers/S3StorageProvider";
+import { SESMailProvider } from "../providers/SESMailProvider";
 
 container.registerSingleton<ICategoriesRepository>(
   "CategoriesRepository",
@@ -48,12 +52,25 @@ container.registerSingleton<IRentalsRepository>(
 
 container.registerSingleton<IDateProvider>("DateProvider", DateProvider);
 
+const emailProvider = {
+  local: container.resolve(EtherealMailProvider),
+  ses: container.resolve(SESMailProvider),
+};
 container.registerInstance<IMailProvider>(
-  "EtherealMailProvider",
-  new EtherealMailProvider()
+  "MailProvider",
+  emailProvider[process.env.EMAIL_PROVIDER]
 );
 
 container.registerSingleton<IUsersTokensRepository>(
   "UsersTokensRepository",
   UsersTokensRepository
+);
+
+const diskStorage = {
+  local: LocalStorageProvider,
+  s3: S3StorageProvider,
+};
+container.registerSingleton<IStorageProvider>(
+  "StorageProvider",
+  diskStorage[process.env.DISK]
 );

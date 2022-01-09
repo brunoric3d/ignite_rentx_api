@@ -1,19 +1,17 @@
 services:
   database:
+    build: .
+    env_file: _database.env
     image: postgres
     container_name: rentx_database
     restart: always
     ports:
       - 5432:5432
-    environment:
-      - POSTGRES_USER=docker
-      - POSTGRES_PASSWORD=ignite
-      - POSTGRES_DB=rentx
-      - POSTGRES_DB_URL=127.17.0.1
     volumes:
       - pgdata:/data/postgres
   app:
     build: .
+    env_file: _app.env
     container_name: rentx
     ports:
       - 3333:3333
