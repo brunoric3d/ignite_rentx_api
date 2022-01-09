@@ -4,13 +4,12 @@ import express, { Request, Response, NextFunction } from "express";
 import "express-async-errors";
 import swaggerUi from "swagger-ui-express";
 
+import upload from "./config/upload";
 import databaseConnection from "./database";
 import { AppError } from "./errors/AppError";
 import routes from "./routes";
-import swaggerConfig from "./swagger.json";
-
 import "./shared/container";
-import upload from "./config/upload";
+import swaggerConfig from "./swagger.json";
 
 databaseConnection();
 

@@ -1,5 +1,5 @@
 {
-  "type": "module",
+  "type": "commonjs",
   "dependencies": {
     "@types/bcryptjs": "^2.4.2",
     "aws-sdk": "^2.1048.0",
