@@ -5,23 +5,17 @@ services:
     image: postgres
     container_name: rentx_database
     restart: always
-    ports:
-      - 5432:5432
+    network_mode: host
     volumes:
       - pgdata:/data/postgres
   app:
     build: .
     env_file: _app.env
     container_name: rentx
-    ports:
-      - 3333:3333
+    network_mode: host
     volumes:
       - .:/usr/app
       - .:/usr/src/app/node_modules
-    links:
-      - database
-    depends_on: 
-      - database
 volumes:
   pgdata:
     driver: local
