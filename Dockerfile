@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 3333
 
-CMD ["npm","run","node ./dist/app.js"]
+CMD ["npm","run","dev"]

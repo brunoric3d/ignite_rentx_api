@@ -1,11 +1,10 @@
 import dotenv from "dotenv";
 
 dotenv.config();
-dotenv.config({ path: "./_database.env" });
 
 export = {
   type: "postgres",
-  host: process.env.POSTGRES_DB_URL,
+  host: "localhost",
   port: process.env.POSTGRES_DB_PORT,
   username: process.env.POSTGRES_USER,
   password: process.env.POSTGRES_PASSWORD,
