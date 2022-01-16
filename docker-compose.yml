@@ -6,12 +6,12 @@ services:
       - POSTGRES_DB=rentx
     image: postgres
     container_name: rentx_database
-    command: postgres -c ALTER SYSTEM SET listen_addresses TO '*';
     restart: always
     ports:
       - "5432:5432"
     volumes:
       - pgdata:/data/postgres
+  
   app:
     build: .
     env_file: .env
