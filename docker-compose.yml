@@ -1,7 +1,9 @@
 services:
   database:
-    build: .
-    env_file: .env
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=ignite
+      - POSTGRES_DB=rentx
     image: postgres
     container_name: rentx_database
     restart: always
