@@ -5,3 +5,5 @@ tmp/*
 coverage
 !tmp/.gitkeep
 _old
+*.lock
+*.log
