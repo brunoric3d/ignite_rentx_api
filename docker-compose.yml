@@ -1,7 +1,17 @@
 services:
+  # nginx-proxy:
+  #   image: jwilder/nginx-proxy
+  #   container_name: reverse_proxy
+  #   ports:
+  #     - "80:80"
+  #   volumes:
+  #     - /var/run/docker.sock:/tmp/docker.sock:ro
+
   database:
-    build: .
     env_file: .env
+    # environment:
+    #   - VIRTUAL_HOST=localhost
+    #   - VIRTUAL_PORT=8000
     image: postgres
     container_name: rentx_database
     restart: always
@@ -10,25 +20,21 @@ services:
     volumes:
       - pgdata:/data/postgres
   
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8080:8080
-  
-  app:
-    build: .
-    env_file: .env
-    container_name: rentx
-    ports:
-      - "3333:3333"
-    volumes:
-      - .:/usr/app
-      - .:/usr/src/app/node_modules
-    links:
-      - database
-    depends_on: 
-      - database
+  # app:
+  #   build: .
+  #   env_file: .env
+  #   container_name: rentx_app
+  #   environment:
+  #     - VIRTUAL_HOST=localhost
+  #   ports:
+  #     - "3333:3333"
+  #   volumes:
+  #     - .:/usr/app
+  #     - .:/usr/src/app/node_modules
+  #   links:
+  #     - database
+  #   depends_on:
+  #     - database
 volumes:
   pgdata:
     driver: local
