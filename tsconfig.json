@@ -6,11 +6,15 @@
     "baseUrl": "./src",
     "outDir": "./dist",
     
+    
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true
-  }
+  },
+  "exclude": [
+    "**/*.spec.ts"
+  ],
 }
